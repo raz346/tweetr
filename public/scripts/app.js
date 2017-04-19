@@ -37,16 +37,25 @@ $(document).ready(function () {
       renderTweets(tweets);
     })
   }
-  // handle submition form
-  $('.new-tweet form').on("submit", function(event){
-    event.preventDefault();
-    $.ajax({
-      method: "POST",
-      url: "/tweets",
-      data: $(this).serialize()
-    }).then(function () {
-      loadTweets();
+  // handle submition
+    $(".new-tweet form").on("submit", function(event){
+      event.preventDefault();
+      var charCount = $(".new-tweet textarea").val().length;
+      if (charCount === 0 ) {
+        alert("please enter a tweet");
+        return;
+      } else if (charCount > 140) {
+        alert("your tweet is too long")
+        return;
+      } else {
+        $.ajax({
+          method: "POST",
+          url: "/tweets",
+          data: $(this).serialize()
+        }).then(function () {
+          loadTweets();
+        });
+      }
     });
-  });
 loadTweets();
 });
