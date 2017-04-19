@@ -1,11 +1,11 @@
 $(document).ready(function () {
-  var MAX_LENGTH = 140;
+  var maxLength = 140;
   var counter;
   $('.new-tweet textarea').on('input', function (event) {
-    // used Array.form to read undefined chars as one insted of two
+    // used Array.form to read undefined chars as one instead of two
     var charCount = Array.from($(this).val()).length;
-    var remainedChar = MAX_LENGTH - charCount ;
-    // cache the counter variable 
+    var remainedChar = maxLength - charCount ;
+    // cache the counter variable
     counter = counter || $(this).parent().children(".counter");
     counter.text(remainedChar);
     if (remainedChar >= 0) {
