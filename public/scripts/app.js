@@ -57,5 +57,11 @@ $(document).ready(function () {
         });
       }
     });
-loadTweets();
+  loadTweets();
+
+  $("#nav-bar .compose").on("click", function(event){
+    $(".new-tweet").slideToggle();
+    $(".new-tweet textarea").focus();
+
+  });
 });

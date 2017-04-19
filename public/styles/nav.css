@@ -1,4 +1,5 @@
 #nav-bar {
+  display: flex;
   position: fixed;
   top: 0;
   height : 80px;
@@ -8,14 +9,33 @@
   padding: 0 2em;
 
 }
+#nav-bar button{
+  background-color: white;
+  margin: 10px;
+  width: 140px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
 
+#nav-bar button h3 {
+  opacity: 0.5;
+}
+
+#nav-bar button:hover h3 {
+  opacity: 1;
+}
+
+#nav-bar button:hover {
+  cursor:pointer;
+}
 #nav-bar .logo {
+  flex-grow: 0;
    width: 80px;
    height: 80px;
    float: left;
 }
 #nav-bar .header{
-  float: left;
+  flex-grow: 1;
   font-size: 200%;
   line-height: 80px;
   margin: 0px 10px;
