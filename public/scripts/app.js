@@ -1,55 +1,73 @@
 $(document).ready(function () {
+  var data = [
+    {
+      "user": {
+        "name": "Newton",
+        "avatars": {
+          "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
+          "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
+          "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
+        },
+        "handle": "@SirIsaac"
+      },
+      "content": {
+        "text": "If I have seen further it is by standing on the shoulders of giants"
+      },
+      "created_at": 1461116232227
+    },
+    {
+      "user": {
+        "name": "Descartes",
+        "avatars": {
+          "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
+          "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
+          "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
+        },
+        "handle": "@rd" },
+      "content": {
+        "text": "Je pense , donc je suis"
+      },
+      "created_at": 1461113959088
+    },
+    {
+      "user": {
+        "name": "Johann von Goethe",
+        "avatars": {
+          "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
+          "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
+          "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
+        },
+        "handle": "@johann49"
+      },
+      "content": {
+        "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
+      },
+      "created_at": 1461113796368
+    }
+  ];
+
   function createTweetElement(tweetData) {
     var $tweet = $("<article>").addClass("tweet");
-    //  access html header and assign the values from the database
-    var $header = $(`
-    <header>
-    <img class="avatar" src="${tweetData.user.avatars.small}" width="40" height="40">
-    <h3 class="fullname">${tweetData.user.name}</h3>
-    <p class="username">username</p>
-    </header>
-      `)
-
-
+    var $header = $("<header>");
+    var $avatar = $("<img>").addClass("avatar").attr("src",tweetData.user.avatars.small);
+    var $fullname = $("<h3>").addClass("fullname").text(tweetData.user.name);
+    var $username = $("<p>").addClass("username").text(tweetData.user.handle);
+    var $contents = $("<p>").addClass("contents").text(tweetData.content.text);
+    var $footer = $("<footer>")
+    var $date = $("<p>").addClass("date").text(tweetData.created_at);
+    var $icons = $("<span>").addClass("icons");
+    // append elements
+    $header.append($avatar, $fullname, $username);
+    $footer.append($date, $icons);
+    $tweet.append($header, $contents, $footer);
+    return $tweet;
   }
-
-  var tweetData = {
-    "user": {
-      "name": "Newton",
-      "avatars": {
-        "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
+  // function to loop through db and render each element
+  function renderTweets(tweets) {
+    tweets.forEach(function(tweet){
+      $('section#tweets-container').append(createTweetElement(tweet));
+    });
   }
-
-  var $tweet = createTweetElement(tweetData);
-  console.log($tweet);
-  $('main.container').append($tweet);
+  renderTweets(data)
 
 });
-
-
-
-  // <article id="tweets-container">
-  //   <header>
-  //   <img class="avatar" src="http://emojipedia-us.s3.amazonaws.com/cache/47/7e/477e41a57d9588f86eff387def2f8761.png" width="40" height="40">
-  //   <h3 class="fullname">fullname</h3>
-  //   <p class="username">username</p>
-  //   </header>
-  //   <p class="contents">some new tweet</p>
-  //   <footer>
-  //     <p>10 days ago </p>
-  //     <span id="icons">
-  //       <i class="fa fa-flag" aria-hidden="true"></i>
-  //       <i class="fa fa-retweet" aria-hidden="true"></i>
-  //       <i class="fa fa-heart" aria-hidden="true"></i>
-  //     </span>
-  //   </footer>
-  // </article>
