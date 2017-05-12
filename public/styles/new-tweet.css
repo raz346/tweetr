@@ -8,10 +8,17 @@
   border-bottom: 2px solid black;
   margin: 25px 10px;
 }
+
 .new-tweet textarea {
   margin: 5px 10px;
   width: 400px;
 }
+
 .new-tweet input {
   margin: 10px;
+}
+
+.new-tweet .counter {
+  float: right;
+  padding: 20px 35px 20px 0;
 }

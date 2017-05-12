@@ -20,7 +20,6 @@ article h3.fullname {
     flex-grow: 1;
     margin: 5px 0 10px 10px;
 
-
 }
 
 article p.username{
@@ -52,7 +51,23 @@ article footer p {
     opacity: 0;
 }
 
+article .icons i {
+        margin: 3px;
+    }
+
 article:hover .icons{
  opacity: 1;
+}
+
+.heart-clicked {
+    color:red;
+}
+
+.heart-unclicked {
+    color:black;
+}
+
+article footer[foo=3]{
+    background-color:red;
 }
 

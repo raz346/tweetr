@@ -12,7 +12,7 @@ $(document).ready(function () {
     var $span = $("<span>").addClass("icons");
     var $icon1 = $("<i>").addClass("fa fa-retweet").attr("aria-hidden", "true");
     var $icon2 = $("<i>").addClass("fa fa-flag").attr("aria-hidden", "true");
-    var $icon3 = $("<i>").addClass("fa fa-heart").attr("aria-hidden", "true");
+    var $icon3 = $("<i>").addClass("fa fa-heart").attr("aria-hidden", "true").data("id", tweetData._id);
     // append elements
     $header.append($avatar, $fullname, $username);
     $span.append($icon1, $icon2, $icon3);
@@ -22,11 +22,22 @@ $(document).ready(function () {
   }
   // function to loop through db and render each element
   function renderTweets(tweets) {
+    var count = 0;
     // in order not to get tweets dublicated
     $('section#tweets-container').empty();
     // loop through db and render each element
     tweets.forEach(function(tweet){
       $('section#tweets-container').prepend(createTweetElement(tweet));
+    });
+
+    $("#tweets-container .fa-heart").on("click", function(event) {
+    $(this).toggleClass("heart-clicked");
+    $.ajax({
+      method: "PUT",
+      url: "/tweets/" + $(this).data("id") +"/like",
+    }).then(function () {
+    loadTweets();
+      });
     });
   }
   //loading tweets from db
@@ -58,6 +69,7 @@ $(document).ready(function () {
       });
     }
     $(".new-tweet textarea").val("");
+
   });
   loadTweets();
 
@@ -65,4 +77,6 @@ $(document).ready(function () {
     $(".new-tweet").slideToggle();
     $(".new-tweet textarea").focus();
   });
+
+
 });
